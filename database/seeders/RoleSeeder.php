@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Permission;
 use App\Models\Role;
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -47,5 +48,9 @@ class RoleSeeder extends Seeder
 
         $adminRole = Role::whereName(Role::ADMIN_ROLE)->first();
         $adminRole->permissions()->sync($adminPermissions->pluck('id'));
+
+        $p = Permission::query()->whereName('order-edit')->first();
+        $u = User::query()->find(1);
+        dd($u->hasRole($p->roles));
     }
 }
