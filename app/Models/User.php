@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -13,6 +14,11 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
+
+    const USER_EDIT = 'user-edit';
+    const USER_INDEX = 'user-index';
+    const USER_CREATE = 'user-create';
+    const USER_BLOCK = 'user-block';
 
     /**
      * The attributes that are mass assignable.
@@ -57,10 +63,17 @@ class User extends Authenticatable
         return $this->belongsTo(Role::class);
     }
 
-    public function hasRole($role)
+    public function orders(): HasMany
     {
-        if (is_string($role))
-            return $this->roles->contains('name', $role);
-        return !!$role->intersect($this->roles)->count();
+        return $this->hasMany(Order::class);
+    }
+
+    public function hasRole($roles)
+    {
+        return !!$roles->filter(function ($role) {
+            if ($this->role->name == $role->name)
+                return $role;
+            return false;
+        })->count();
     }
 }

@@ -44,13 +44,10 @@ class RoleSeeder extends Seeder
 
         $adminPermissions = Permission::whereNot('name', 'like', 'user%')
             ->whereNot('name', 'like', 'order-edit')
-            ->whereNot('name', 'like', 'payment-edit');
+            ->whereNot('name', 'like', 'payment-edit')
+            ->get();
 
         $adminRole = Role::whereName(Role::ADMIN_ROLE)->first();
         $adminRole->permissions()->sync($adminPermissions->pluck('id'));
-
-        $p = Permission::query()->whereName('order-edit')->first();
-        $u = User::query()->find(1);
-        dd($u->hasRole($p->roles));
     }
 }

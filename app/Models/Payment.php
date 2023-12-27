@@ -10,6 +10,13 @@ class Payment extends Model
 {
     use HasFactory;
 
+    const PAYMENT_EDIT = 'payment-edit';
+    const PAYMENT_INDEX = 'payment-index';
+
+    const STATUS_PAID = 'paid';
+    const STATUS_UNPAID = 'unpaid';
+    const STATUS_CANCELED = 'canceled';
+
     protected $fillable = [
         'order_id',
         'status',

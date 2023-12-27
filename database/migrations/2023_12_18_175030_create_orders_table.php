@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -18,14 +17,14 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
             $table->integer('price');
-            $table->enum('status', ['preparation', 'posted', 'received', 'canceled'])->default('preparation');
+            $table->enum('status', ['unpaid', 'preparation', 'posted', 'received', 'canceled'])->default('preparation');
 
             $table->string('tracking_serial')->nullable();
 
             $table->timestamps();
         });
 
-        Schema::create('order_products', function (Blueprint $table) {
+        Schema::create('order_product', function (Blueprint $table) {
             $table->id();
 
             $table->unsignedBigInteger('order_id');
@@ -34,7 +33,7 @@ return new class extends Migration
             $table->unsignedBigInteger('product_id');
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
 
-            $table->integer('quantity');
+            $table->integer('quantity')->default(1);
 
             $table->timestamps();
         });

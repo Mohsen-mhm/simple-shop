@@ -3,16 +3,17 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ env('APP_NAME') }}</title>
-    <link rel="stylesheet" href="./assets/css/flowbite/flowbite.min.css">
-    <link rel="stylesheet" href="./assets/fonts/fontawesome/css/fontawesome.min.css">
-    <link rel="stylesheet" href="./assets/fonts/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="/assets/css/flowbite/flowbite.min.css">
+    <link rel="stylesheet" href="/assets/fonts/fontawesome/css/fontawesome.min.css">
+    <link rel="stylesheet" href="/assets/fonts/fontawesome/css/all.min.css">
 
     <style>
         @font-face {
             font-family: Vazir;
-            src: url("./assets/fonts/vazir/Vazir.ttf");
+            src: url("/assets/fonts/vazir/Vazir.ttf");
         }
 
         * {
@@ -30,7 +31,7 @@
     @include('layouts.footer')
 </main>
 
-<script src="./assets/js/flowbite/flowbite.min.js"></script>
-<script src="./assets/js/tailwind/tailwind-3.3.5.js"></script>
+<script src="/assets/js/flowbite/flowbite.min.js"></script>
+<script src="/assets/js/tailwind/tailwind-3.3.5.js"></script>
 </body>
 </html>

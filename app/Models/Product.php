@@ -11,9 +11,15 @@ class Product extends Model
 {
     use HasFactory;
 
+    const PRODUCT_EDIT = 'product-edit';
+    const PRODUCT_INDEX = 'product-index';
+    const PRODUCT_CREATE = 'product-create';
+    const PRODUCT_DELETE = 'product-delete';
+
     protected $fillable = [
         'name',
         'title',
+        'slug',
         'price',
         'quantity',
         'colors',
@@ -27,5 +33,15 @@ class Product extends Model
     public function orders(): BelongsToMany
     {
         return $this->belongsToMany(Order::class);
+    }
+
+    public function incrementQuantity(int $quantity = 1): bool
+    {
+        return $this->update(['quantity' => $this->quantity + 1]);
+    }
+
+    public function decrementQuantity(int $quantity = 1): bool
+    {
+        return $this->update(['quantity' => $this->quantity - 1]);
     }
 }

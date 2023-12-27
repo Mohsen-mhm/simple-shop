@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('title');
 
+            $table->string('slug');
+
             $table->integer('price');
             $table->integer('quantity');
 
