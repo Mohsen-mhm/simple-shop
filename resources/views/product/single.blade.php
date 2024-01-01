@@ -1,6 +1,4 @@
-@extends('layouts.master')
-
-@section('content')
+<x-app-layout>
     <section class="text-gray-600 body-font overflow-hidden">
         <div class="container px-5 py-24 mx-auto">
             <div class="lg:w-4/5 mx-auto flex flex-wrap">
@@ -20,7 +18,7 @@
                                             <input type="radio" id="{{ $color }}" name="color" value="{{ $color }}"
                                                    class="hidden peer" required>
                                             <label for="{{ $color }}"
-                                                   class="inline-flex items-center justify-between w-full p-3 bg-{{ $color }}-500 border-2 border-{{ $color }}-500 rounded-full cursor-pointer peer-checked:border-white peer-checked:bg-{{ $color }}-700 hover:bg-{{ $color }}-600"></label>
+                                                   class="inline-flex items-center justify-between w-full p-3 bg-{{ $color }}-500 border-{{ $color }}-500 rounded-full cursor-pointer peer-checked:border-2 peer-checked:border-white peer-checked:bg-{{ $color }}-700 hover:bg-{{ $color }}-600"></label>
                                         </li>
                                     @endforeach
                                 </ul>
@@ -40,4 +38,4 @@
             </div>
         </div>
     </section>
-@endsection
+</x-app-layout>

@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -29,7 +30,6 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'role_id',
         'blocked',
     ];
 
@@ -58,9 +58,9 @@ class User extends Authenticatable
         return $this->morphOne(Image::class, 'imgable');
     }
 
-    public function role(): BelongsTo
+    public function roles(): BelongsToMany
     {
-        return $this->belongsTo(Role::class);
+        return $this->belongsToMany(Role::class);
     }
 
     public function orders(): HasMany
@@ -68,12 +68,10 @@ class User extends Authenticatable
         return $this->hasMany(Order::class);
     }
 
-    public function hasRole($roles)
+    public function hasRole($role): bool
     {
-        return !!$roles->filter(function ($role) {
-            if ($this->role->name == $role->name)
-                return $role;
-            return false;
-        })->count();
+        if (is_string($role))
+            return $this->roles->contains('name', $role);
+        return !!$role->intersect($this->roles)->count();
     }
 }

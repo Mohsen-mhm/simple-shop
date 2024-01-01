@@ -1,5 +1,7 @@
 <header class="sticky top-0 flex items-center justify-between w-full px-4 shadow-md bg-gray-800 z-10 rounded-xl">
-    <img src="/img/logo.png" alt="logo" class="w-12 h-12 fill-current text-gray-500 my-3">
+    <a href="{{ route('home') }}">
+        <img src="/img/logo.png" alt="logo" class="w-12 h-12 fill-current text-gray-500 my-3">
+    </a>
     <nav
         aria-label="Main" data-orientation="horizontal"
         class="relative z-10 flex max-w-max flex-1 items-center justify-center p-5">

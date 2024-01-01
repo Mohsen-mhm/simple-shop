@@ -1,6 +1,4 @@
-@extends('layouts.master')
-
-@section('content')
+<x-app-layout>
     <main class="flex flex-col items-center justify-center bg-gray-100">
         <div class="rounded-lg border bg-gray-800 text-white shadow-sm max-w-md w-full" data-v0-t="card">
             <div class="flex flex-col space-y-1.5 p-6">
@@ -40,4 +38,4 @@
             </div>
         </div>
     </main>
-@endsection
+</x-app-layout>

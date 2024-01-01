@@ -15,30 +15,29 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        $god = Role::whereName(Role::GOD_ROLE)->first();
-        $admin = Role::whereName(Role::ADMIN_ROLE)->first();
+        $godRole = Role::whereName(Role::GOD_ROLE)->first();
+        $adminRole = Role::whereName(Role::ADMIN_ROLE)->first();
 
-        $items = [
-            [
-                'name' => 'marzieh',
-                'email' => 'marzieh@gmail.com',
-                'password' => Hash::make('123456'),
-                'role_id' => $god->id
-            ],
-            [
-                'name' => 'admin',
-                'email' => 'admin@gmail.com',
-                'password' => Hash::make('654321'),
-                'role_id' => $admin->id
-            ],
+        $god = [
+            'name' => 'marzieh',
+            'email' => 'marzieh@gmail.com',
+            'password' => Hash::make('123456'),
         ];
+        $godUser = User::whereEmail($god['email'])->first();
+        if (!$godUser) {
+            $user = User::create($god);
+            $user->roles()->attach($godRole);
+        }
 
-        foreach ($items as $item) {
-            $user = User::whereEmail($item['email'])->first();
-
-            if (!$user) {
-                User::create($item);
-            }
+        $admin = [
+            'name' => 'admin',
+            'email' => 'admin@gmail.com',
+            'password' => Hash::make('654321'),
+        ];
+        $adminUser = User::whereEmail($admin['email'])->first();
+        if (!$adminUser) {
+            $user = User::create($admin);
+            $user->roles()->attach($adminRole);
         }
     }
 }

@@ -19,10 +19,14 @@ class PaymentController extends Controller
             });
 
             $orderItems = $cartItem->mapWithKeys(function ($cart) {
-                return [$cart['product']->id => ['quantity' => $cart['quantity']]];
+                return [$cart['product']->id => [
+                    'quantity' => $cart['quantity'],
+                    'color' => $cart['color'],
+                ]];
             });
 
             $order = auth()->user()->orders()->create([
+                'uuid' => Str::uuid(),
                 'status' => 'unpaid',
                 'price' => $price
             ]);
@@ -58,6 +62,10 @@ class PaymentController extends Controller
                     'status' => Payment::STATUS_PAID,
                     'resnumber' => $resnumber,
                 ]);
+                $cartItems = Cart::all();
+                foreach ($cartItems as $item){
+                    Cart::delete($item['id']);
+                }
                 return redirect()->route('payment.success', $resnumber);
             } else {
                 return redirect()->route('cart');

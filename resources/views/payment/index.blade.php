@@ -1,6 +1,4 @@
-@extends('layouts.master')
-
-@section('content')
+<x-app-layout>
     <div class="flex flex-col justify-center text-white items-center space-x-8 mt-5">
         <aside class="w-full max-w-xs">
             <div class="rounded-lg border bg-gray-800 text-card-foreground shadow-sm w-full" data-v0-t="card">
@@ -86,4 +84,4 @@
             </form>
         </div>
     </div>
-@endsection
+</x-app-layout>

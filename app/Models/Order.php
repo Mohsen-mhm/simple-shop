@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Order extends Model
 {
@@ -20,7 +21,14 @@ class Order extends Model
     const STATUS_RECEIVED = 'received';
     const STATUS_CANCELED = 'canceled';
 
+    const FA_UNPAID = 'پرداخت نشده';
+    const FA_PREPARATION = 'در حال آماده سازی';
+    const FA_POSTED = 'ارسال شده';
+    const FA_RECEIVED = 'دریافت شده';
+    const FA_CANCELED = 'لغو شده';
+
     protected $fillable = [
+        'uuid',
         'user_id',
         'price',
         'status',
@@ -35,6 +43,11 @@ class Order extends Model
     public function products(): BelongsToMany
     {
         return $this->belongsToMany(Product::class);
+    }
+
+    public function payments(): HasMany
+    {
+        return $this->hasMany(Payment::class);
     }
 
     public function setStatus(string $status): bool
