@@ -17,6 +17,10 @@ class Payment extends Model
     const STATUS_UNPAID = 'unpaid';
     const STATUS_CANCELED = 'canceled';
 
+    const FA_PAID = 'پرداخت‌شده';
+    const FA_UNPAID = 'پرداخت‌نشده';
+    const FA_CANCELED = 'لغوشده';
+
     protected $fillable = [
         'order_id',
         'status',

@@ -12,13 +12,16 @@ class OrderController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         if (!Gate::allows(Order::ORDER_INDEX)) {
             return redirect()->route('admin.index');
         }
+        $query = $request->input('search');
+        dd($query);
 
-        $orders = Order::query()->paginate(10);
+        $orders = Order::query()->where('uuid', 'like', '%' . $query . '%')->paginate(10);
+
         return view('admin.orders.index', compact('orders'));
     }
 
@@ -27,11 +30,14 @@ class OrderController extends Controller
      */
     public function edit(string $id)
     {
+        $order = Order::query()->findOrFail($id);
+
         if (!Gate::allows(Order::ORDER_EDIT)) {
             return redirect()->route('admin.index');
+        } elseif (!$order->payments->count()) {
+            return redirect()->route('admin.orders.index')->withErrors('این سفارش پرداخت نشده است.');
         }
 
-        $order = Order::query()->findOrFail($id);
 
         return view('admin.orders.edit', compact('order'));
     }
@@ -41,8 +47,12 @@ class OrderController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $order = Order::query()->findOrFail($id);
+
         if (!Gate::allows(Order::ORDER_EDIT)) {
             return redirect()->route('admin.index');
+        } elseif (!$order->payments->count()) {
+            return redirect()->route('admin.orders.index')->withErrors('این سفارش پرداخت نشده است.');
         }
 
         $validData = $request->validate([
@@ -61,8 +71,6 @@ class OrderController extends Controller
                 return back()->withErrors('در این وضعیت، کد رهگیری اجباری است.');
             }
         }
-
-        $order = Order::query()->findOrFail($id);
 
         $order->update($validData);
 
