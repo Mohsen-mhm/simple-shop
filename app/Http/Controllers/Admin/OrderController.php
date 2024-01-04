@@ -18,7 +18,6 @@ class OrderController extends Controller
             return redirect()->route('admin.index');
         }
         $query = $request->input('search');
-        dd($query);
 
         $orders = Order::query()->where('uuid', 'like', '%' . $query . '%')->paginate(10);
 
