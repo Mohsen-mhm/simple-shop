@@ -4,9 +4,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
                 @foreach(\App\Models\Product::all() as $product)
                     <div class="relative group overflow-hidden rounded-lg bg-gray-800 text-white">
-                        <a class="absolute inset-0 z-10" @if(!$product->quantity) onclick="event.preventDefault()"
-                           @endif
-                           href="{{ $product->quantity ? route('product.single', $product->slug) : '#' }}">
+                        <a class="absolute inset-0 z-10" href="{{ route('product.single', $product->slug) }}">
                             <span class="sr-only">{{ $product->name }}</span>
                         </a>
                         <img src="./storage/images/products/{{ $product->image->image }}" alt="{{ $product->name }}"
@@ -18,12 +16,12 @@
                             <h4 class="font-semibold text-base md:text-lg">{{ $product->price }} تومان</h4>
                             @if($product->quantity)
                                 <button
-                                    class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-primary/90 h-10 px-4 py-2 bg-white text-gray-800">
+                                    class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
                                     جزئیات
                                 </button>
                             @else
                                 <button
-                                    class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-primary/90 h-10 px-4 py-2 bg-white text-gray-800">
+                                    class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">
                                     اتمام موجودی
                                 </button>
                             @endif

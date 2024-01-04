@@ -28,10 +28,16 @@
                             <span
                                 class="title-font font-medium text-xl text-yellow-500">{{ $product->price }} تومان</span>
                             @csrf
-                            <button type="submit"
-                                    class="flex mr-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded transition">
-                                افزودن به سبد خرید
-                            </button>
+                            @if($product->quantity)
+                                <button type="submit"
+                                        class="flex mr-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded transition">
+                                    افزودن به سبد خرید
+                                </button>
+                            @else
+                                <div class="cursor-pointer mr-auto transition focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">
+                                    موجودی این محصول تمام شده.
+                                </div>
+                            @endif
                         </div>
                     </form>
                 </div>
