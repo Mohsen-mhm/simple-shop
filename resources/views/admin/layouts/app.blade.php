@@ -29,7 +29,13 @@
 
     <!-- Page Content -->
     <main class="flex flex-col items-center justify-center gap-6 px-4 py-6 md:px-8 md:py-12 bg-gray-900">
-        @yield('content')
+        <div class="p-4 sm:ml-64 w-3/4">
+            <section class="text-gray-200 body-font">
+                <div class="container px-5 py-24 mx-auto">
+                    @yield('content')
+                </div>
+            </section>
+        </div>
     </main>
 </div>
 </body>

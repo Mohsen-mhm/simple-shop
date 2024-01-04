@@ -21,11 +21,11 @@ class Order extends Model
     const STATUS_RECEIVED = 'received';
     const STATUS_CANCELED = 'canceled';
 
-    const FA_UNPAID = 'پرداخت نشده';
-    const FA_PREPARATION = 'در حال آماده سازی';
-    const FA_POSTED = 'ارسال شده';
-    const FA_RECEIVED = 'دریافت شده';
-    const FA_CANCELED = 'لغو شده';
+    const FA_UNPAID = 'پرداخت‌نشده';
+    const FA_PREPARATION = 'درحال‌آماده‌سازی';
+    const FA_POSTED = 'ارسال‌شده';
+    const FA_RECEIVED = 'دریافت‌شده';
+    const FA_CANCELED = 'لغوشده';
 
     protected $fillable = [
         'uuid',
